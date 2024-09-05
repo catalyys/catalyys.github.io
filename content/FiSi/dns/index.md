@@ -20,7 +20,7 @@ tags: ["fisi", "dns"]
 1. drei DNS Server miteinander verbinden und eine Kaskade bilden
 2. einen mittleren DNS konfigurieren, der alle Zonen kennt
 
-![DNS Abbildung](dns_azubi.jpeg)
+![DNS Abbildung](dns_azubi.png)
 
 ## Anleitung
 
