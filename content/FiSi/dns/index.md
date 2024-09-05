@@ -1,12 +1,11 @@
 ---
-title: "test"
+title: "DNS"
 date: 2024-09-05
 draft: false
-description: "a description"
-tags: ["example", "tag"]
+description: "dns mit IPv4"
+tags: ["fisi", "dns"]
 ---
 
-# DNS
 
 ## grober Überblick der Arbeitsschritte
 
@@ -45,7 +44,7 @@ wichtige Dateien:
 Bei Debian wird im Standart die `named.conf` in mehrere Dateien aufgespaltet. In dieser Übung ist das aber nicht notwendig, da wir nur eine kleine `named.conf`brauchen, die auch in einer Datei übersichtlich.
 Falls ihr die Datei trotzdem aufteilen wollt, ist das mit dem `include`-Befehl möglich.
 
-```bash
+```ini
 ...
 include "/etc/bind/named.conf.options";
 ...
@@ -82,7 +81,7 @@ server.azubi.dataport.de. 3600 IN A 192.168.0.2
 ```
 
 {{< collapsible label="Lösung azubi.dataport.de.zone" >}}
-```bash
+```dns
 $ORIGIN azubi.dataport.de.
 $TTL    3600
 @       IN      SOA     ns1.azubi.dataport.de. root.azubi.dataport.de. (

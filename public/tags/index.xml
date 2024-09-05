@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on FiSi Aufgaben</title>
+    <title>Tags on Blog</title>
     <link>http://localhost:1313/tags/</link>
-    <description>Recent content in Tags on FiSi Aufgaben</description>
+    <description>Recent content in Tags on Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>de</language>
     <copyright>© 2024 Oliver Lange</copyright>
     <lastBuildDate>Thu, 05 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dns</title>
+      <link>http://localhost:1313/tags/dns/</link>
+      <pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/dns/</guid>
+      <description></description>
+      
+    </item>
+    
     <item>
       <title>Example</title>
       <link>http://localhost:1313/tags/example/</link>
       <pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/tags/example/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Fisi</title>
+      <link>http://localhost:1313/tags/fisi/</link>
+      <pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/fisi/</guid>
       <description></description>
       
     </item>
