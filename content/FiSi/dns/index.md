@@ -4,7 +4,7 @@ date: 2024-08-23
 lastmod: 2024-09-05
 draft: false
 description: "dns mit IPv4"
-tags: ["fisi", "dns"]
+tags: ["fisi", "dns", "übung"]
 ---
 
 
