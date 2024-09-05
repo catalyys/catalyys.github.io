@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog</title>
-    <link>http://localhost:1313/</link>
+    <link>http://localhost:41099/</link>
     <description>Recent content on Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>de</language>
     <copyright>© 2024 Oliver Lange</copyright>
-    <lastBuildDate>Thu, 05 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:41099/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DNS</title>
-      <link>http://localhost:1313/fisi/dns/</link>
+      <link>http://localhost:41099/fisi/dns/</link>
       <pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/fisi/dns/</guid>
+      <guid>http://localhost:41099/fisi/dns/</guid>
       <description></description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/fisi/dns/featured.jpeg" />
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:41099/fisi/dns/featured.jpeg" />
     </item>
     
     <item>
       <title>test</title>
-      <link>http://localhost:1313/fisi/1725525700149-test/</link>
+      <link>http://localhost:41099/fisi/1725525700149-test/</link>
       <pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/fisi/1725525700149-test/</guid>
+      <guid>http://localhost:41099/fisi/1725525700149-test/</guid>
       <description></description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/fisi/1725525700149-test/featured.png" />
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:41099/fisi/1725525700149-test/featured.png" />
     </item>
     
   </channel>

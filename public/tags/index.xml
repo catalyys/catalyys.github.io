@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Blog</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>http://localhost:41099/tags/</link>
     <description>Recent content in Tags on Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>de</language>
     <copyright>© 2024 Oliver Lange</copyright>
-    <lastBuildDate>Thu, 05 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:41099/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dns</title>
-      <link>http://localhost:1313/tags/dns/</link>
+      <link>http://localhost:41099/tags/dns/</link>
       <pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/dns/</guid>
+      <guid>http://localhost:41099/tags/dns/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Example</title>
-      <link>http://localhost:1313/tags/example/</link>
+      <link>http://localhost:41099/tags/example/</link>
       <pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/example/</guid>
+      <guid>http://localhost:41099/tags/example/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Fisi</title>
-      <link>http://localhost:1313/tags/fisi/</link>
+      <link>http://localhost:41099/tags/fisi/</link>
       <pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/fisi/</guid>
+      <guid>http://localhost:41099/tags/fisi/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Tag</title>
-      <link>http://localhost:1313/tags/tag/</link>
+      <link>http://localhost:41099/tags/tag/</link>
       <pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/tag/</guid>
+      <guid>http://localhost:41099/tags/tag/</guid>
       <description></description>
       
     </item>
