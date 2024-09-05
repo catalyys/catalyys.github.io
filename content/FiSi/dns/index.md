@@ -1,6 +1,7 @@
 ---
 title: "DNS"
-date: 2024-09-05
+date: 2024-08-23
+lastmod: 2024-09-05
 draft: false
 description: "dns mit IPv4"
 tags: ["fisi", "dns"]
@@ -100,30 +101,35 @@ mail    IN      CNAME   server
 ```
 {{< /collapsible >}}
 
-> [!example]- Lösung named.conf
->
->```bash
+<br>
+
+{{< collapsible label="Lösung named.conf" >}}
+
+```dns
 acl goodclients {
     localhost;
     localnets;
 };
->
+
 options {
   listen-on { 0.0.0.0; };
   directory "/var/cache/bind";
->
+
   forward only;
   forwarders { 1.1.1.1; };
->
+
   dnssec-validation yes;
   allow-query { goodclients; };
 };
->
+
 zone "azubi.dataport.de" IN {
   type primary;
   file "/var/lib/bind/azubi.dataport.de.zone";
   allow-update { none; };
 };
+```
+
+{{< /collapsible >}}
 
 ### *bind* konfigurieren auf *ns2*
 
@@ -150,9 +156,9 @@ root@ns2# dig +noall +answer debian.olli.azubi.dataport.de @localhost
 debian.olli.azubi.dataport.de. 3600 IN A 192.168.2.2
 ```
 
-> [!example]-  Lösung olli.azubi.dataport.de.zone
->
->```bash
+{{< collapsible label="Lösung olli.azubi.dataport.de.zone" >}}
+
+```zone
 $ORIGIN olli.azubi.dataport.de.
 $TTL    3600
 @       IN      SOA     ns2.olli.azubi.dataport.de. root.olli.azubi.dataport.de. (
@@ -166,11 +172,15 @@ $TTL    3600
 >
 ns2     IN      A       192.168.2.1
 debian    IN      A       192.168.2.2
+```
 
+{{< /collapsible >}}
 
-> [!example]- Lösung named.conf
->
->```bash
+<br>
+
+{{< collapsible label="Lösung named.conf" >}}
+
+```bash
 acl goodclients {
     localhost;
     localnets;
@@ -192,6 +202,9 @@ zone "olli.azubi.dataport.de" IN {
   file "/var/lib/bind/olli.azubi.dataport.de.zone";
   allow-update { none; };
 };
+```
+
+{{< /collapsible >}}
 
 ### redirect Zone
 
@@ -207,9 +220,8 @@ Für eine secondary Zone müsst ihr auf *ns2* den Transfer der Zone erlauben. Da
 Hier noch ein paar Befehle die euch helfen können:
 - `rndc reload` um im *bind* einen reload der Zonen zu machen und damit einen Transfer der Zone
 
-> [!example]-  Lösung named.conf *ns1*
->
->```bash
+{{< collapsible label="Lösung named.conf ns1" >}}
+```zone
 ...
 zone "olli.azubi.dataport.de" IN {
   type secondary;
@@ -217,11 +229,16 @@ zone "olli.azubi.dataport.de" IN {
   allow-notiy { 192.168.2.1; };
   primaries { 192.168.2.1; };
 };
+```
 
-> [!example]-  Lösung named.conf *ns2*
->
-Wichtig ist hier, in der Zone die **serial** zu erhöhen bei jeder Änderung.
->```bash
+{{< /collapsible >}}
+
+<br>
+
+{{< collapsible label="Lösung named.conf ns2" >}}
+>Wichtig ist hier, in der **Zone** die **serial** zu erhöhen bei jeder Änderung.
+
+```zone
 ...
 zone "olli.azubi.dataport.de" IN {
   type primary;
@@ -231,18 +248,24 @@ zone "olli.azubi.dataport.de" IN {
   also-notify { 192.168.0.1; };
   allow-transfer { 192.168.0.1; };
 };
+```
+
+{{< /collapsible >}}
 
 #### forward
 
 Die forward Zone wird einfach auf *ns1* in der `named.conf` angelegt und schickt sämtliche Anfrage von der Domäne an den forwarder. 
 
-> [!example]-  Lösung named.conf forward Zone
->
->```bash
+
+{{< collapsible label="Lösung named.conf forward Zone" >}}
+
+```bind
 ...
 zone "olli.azubi.dataport.de" IN {
   type forward;
   forward only;
   forwarders { 192.168.2.1; };
 };
+```
 
+{{< /collapsible >}}
