@@ -8,6 +8,7 @@ disableImageOptimization = false
 disableTextInHeader = false
 giteaDefaultServer = "https://git.fsfe.org"
 forgejoDefaultServer = "https://v8.next.forgejo.org"
+smartTOC = "enable"
 
 [header]
 layout = "basic"
@@ -20,7 +21,7 @@ showAppearanceSwitcher = true
 showScrollToTop = true
 
 [homepage]
-layout = "profile"
+layout = "card"
 showRecent = "enable"
 showRecentItems = "3"
 showMoreLink = false
@@ -48,7 +49,7 @@ showHeadingAnchors = true
 showPagination = true
 invertPagination = false
 showReadingTime = true
-showTableOfContents = false
+showTableOfContents = "enable"
 showTaxonomies = false
 showAuthorsBadges = false
 showWordCount = true
