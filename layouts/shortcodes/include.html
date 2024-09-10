@@ -1,0 +1,9 @@
+{{ $heading := .Get 1 }}
+
+{{ $pattern := printf "%s%s%s" `(?sU)#+ ` $heading `.*(#|\z)` }}
+
+{{ with site.GetPage (.Get 0) }}
+  {{ index (findRE $pattern .RenderShortcodes 1) 0 | replaceRE "#$" "" | safeHTML }}
+{{ end }}
+
+

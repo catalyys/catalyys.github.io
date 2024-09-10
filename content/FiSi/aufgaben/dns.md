@@ -5,6 +5,7 @@ lastmod: 2024-09-05
 draft: false
 description: "dns mit IPv4"
 tags: ["fisi", "dns", "übung"]
+featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/dns_azubi.png?raw=true"
 ---
 
 
