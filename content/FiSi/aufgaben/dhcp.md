@@ -5,6 +5,7 @@ lastmod: 2024-09-10
 draft: false
 description: "dhcp mit IPv4"
 tags: ["fisi", "dhcp", "übung"]
+type: "übung"
 ---
 
 ## Anleitung

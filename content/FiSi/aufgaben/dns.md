@@ -6,6 +6,7 @@ draft: false
 description: "dns mit IPv4"
 tags: ["fisi", "dns", "übung"]
 featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/dns_azubi.png?raw=true"
+type: "übung"
 ---
 
 
@@ -14,7 +15,6 @@ featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/d
 1. drei Linux VMs installieren (Debian)
 2. auf allen *bind* installieren
 3. alle *bind* konfigurieren
-4. mit Ansible automatisieren
 
 ## Ziele
 

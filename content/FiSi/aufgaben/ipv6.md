@@ -6,6 +6,7 @@ draft: false
 description: "dhcp und dns mit IPv6"
 tags: ["fisi", "dns", "dhcp", "ipv6", "übung"]
 featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/dhcp_dns_ipv6_azubi.svg?raw=true"
+type: "übung"
 ---
 
 ## Vorraussetzungen
@@ -38,6 +39,7 @@ Zuerst muss *bind* und *dhcp* installiert werden. Mit folgendem Befehl könnt ih
 ```bash
 apt install bind9 dnsutils isc-dhcp-server
 ```
+
 {{% include "/FiSi/aufgaben/dhcp.md" "\*dhcp\* konfigurieren allgemein" %}}
 {{% include "/FiSi/aufgaben/dhcp.md" "Beispiele" %}}
 {{% include "/FiSi/aufgaben/dhcp.md" "Troubleshooting" %}}

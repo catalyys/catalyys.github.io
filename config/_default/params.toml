@@ -1,4 +1,4 @@
-colorScheme = "noir"
+colorScheme = "blowfish"
 defaultAppearance = "dark"
 autoSwitchAppearance = true
 enableSearch = true
@@ -51,7 +51,7 @@ showPagination = true
 invertPagination = false
 showReadingTime = false
 showTableOfContents = true
-showTaxonomies = false
+showTaxonomies = true
 showAuthorsBadges = false
 showWordCount = false
 showZenMode = false
@@ -65,7 +65,7 @@ showSummary = false
 showViews = false
 showLikes = false
 showTableOfContents = false
-showCards = false
+showCards = true
 orderByWeight = false
 groupByYear = true
 cardView = false
@@ -78,11 +78,11 @@ excludedKinds = [ "taxonomy", "term" ]
 [taxonomy]
 showTermCount = true
 showHero = false
-showBreadcrumbs = false
+showBreadcrumbs = true
 showViews = false
 showLikes = false
-showTableOfContents = false
-cardView = false
+showTableOfContents = true
+cardView = true
 
 [term]
 showHero = false
