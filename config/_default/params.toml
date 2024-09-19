@@ -9,6 +9,7 @@ disableTextInHeader = false
 giteaDefaultServer = "https://git.fsfe.org"
 forgejoDefaultServer = "https://v8.next.forgejo.org"
 smartTOC = "enable"
+mainSections = ["doku", "übung"]
 
 [header]
 layout = "basic"
@@ -21,13 +22,14 @@ showAppearanceSwitcher = true
 showScrollToTop = true
 
 [homepage]
-layout = "background"
+layout = "hero"
 showRecent = true
 showRecentItems = "6"
 showMoreLink = false
-showMoreLinkDest = "/posts/"
+showMoreLinkDest = "/fisi/"
 cardView = true
-cardViewScreenWidth = true
+cardViewScreenWidth = false
+homepageImage = "server.jpg"
 layoutBackgroundBlur = true
 
 [article]
@@ -37,7 +39,7 @@ showLikes = false
 showDateOnlyInArticle = false
 showDateUpdated = true
 showAuthor = false
-showHero = false
+showHero = true
 layoutBackgroundBlur = true
 layoutBackgroundHeaderSpace = true
 showBreadcrumbs = true
@@ -47,7 +49,7 @@ showEdit = true
 editAppendPath = true
 seriesOpened = false
 showHeadingAnchors = true
-showPagination = true
+showPagination = false
 invertPagination = false
 showReadingTime = false
 showTableOfContents = true

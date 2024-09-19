@@ -1,6 +1,6 @@
 ---
 title: "IPv6"
-date: 2024-09-16
+date: 2026-10-16
 lastmod: 2024-09-16
 draft: true
 description: "ipv6 überblick"

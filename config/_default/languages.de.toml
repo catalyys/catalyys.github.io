@@ -2,7 +2,7 @@ disabled = false
 languageCode = "de"
 languageName = "German"
 weight = 1
-title = "Blog"
+title = "🎱"
 
 [params]
 displayName = "de"
@@ -12,3 +12,5 @@ dateFormat = "2. January 2006"
 
 [params.author]
 name = "Oliver Lange"
+image = "ripndip.jpg"
+#headline = ""
