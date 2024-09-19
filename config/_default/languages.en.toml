@@ -1,12 +1,12 @@
 disabled = false
-languageCode = "de"
-languageName = "German"
+languageCode = "en"
+languageName = "English"
 weight = 1
 title = "Blog"
 
 [params]
-displayName = "de"
-isoCode = "de"
+displayName = "en"
+isoCode = "en"
 rtl = false
 dateFormat = "2. January 2006"
 
