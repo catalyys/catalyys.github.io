@@ -4,7 +4,8 @@
 
 theme = "blowfish" # UNCOMMENT THIS LINE
 baseURL = "https://catalyys.github.io/"
-defaultContentLanguage = "en"
+defaultContentLanguage = "de"
+titleCaseStyle = 'none'
 
 # pluralizeListTitles = "true" # hugo function useful for non-english languages, find out more in  https://gohugo.io/getting-started/configuration/#pluralizelisttitles
 
