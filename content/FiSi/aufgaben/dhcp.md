@@ -2,7 +2,7 @@
 title: "DHCP"
 date: 2024-09-02
 lastmod: 2024-09-10
-draft: false
+draft: true
 description: "dhcp mit IPv4"
 tags: ["fisi", "dhcp", "übung"]
 type: "übung"
