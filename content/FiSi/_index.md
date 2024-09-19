@@ -6,8 +6,3 @@ Sammlung von Übungen und Beiträgen zum Fachinformatiker Systemintegration.
 
 ---
 
-{{< list title="Übungen" cardView=true limit=6 where="Type" value="übung" >}}
-
----
-
-{{< list title="Doku" cardView=true limit=6 where="Type" value="doku" >}}
