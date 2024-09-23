@@ -87,7 +87,7 @@ set service dhcp-server shared-network-name prod subnet 10.100.1.0/24 range 0 st
 
 Im nächsten Schritt wird die Firewall aktiviert. Dabei soll erstmal nur ICMP erlaubt werden zwischen den Netzen.
 
-Hierbei schaut ihr euch die Doku zur [Zone Based Firewall](https://docs.vyos.io/en/latest/configuration/firewall/zone.html) durch und wieder den Abschnitt im [Quick Start Guide](https://docs.vyos.io/en/latest/quick-start.html).
+Hierbei schaut ihr euch die Doku zur [Zone Based Firewall](https://docs.vyos.io/en/latest/configuration/firewall/zone.html) an und wieder den Abschnitt dazu im [Quick Start Guide](https://docs.vyos.io/en/latest/quick-start.html).
 
 {{< alert >}}
 Damit das nicht zu Kompliziert wird, könnt ihr nur eine Chain nehmen und in dieser alle Regeln verwalten.
