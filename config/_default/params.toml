@@ -9,7 +9,7 @@ disableTextInHeader = false
 giteaDefaultServer = "https://git.fsfe.org"
 forgejoDefaultServer = "https://v8.next.forgejo.org"
 smartTOC = "enable"
-mainSections = [ "doku", "übung" ]
+mainSections = [ "übung", "projekt" ]
 
 [header]
 layout = "fixed-fill-blur"
