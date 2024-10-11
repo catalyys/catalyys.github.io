@@ -9,10 +9,10 @@ disableTextInHeader = false
 giteaDefaultServer = "https://git.fsfe.org"
 forgejoDefaultServer = "https://v8.next.forgejo.org"
 smartTOC = "enable"
-mainSections = ["doku", "übung"]
+mainSections = [ "doku", "übung" ]
 
 [header]
-layout = "basic"
+layout = "fixed-fill-blur"
 
 [footer]
 showMenu = true
