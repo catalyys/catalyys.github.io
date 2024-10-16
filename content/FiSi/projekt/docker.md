@@ -71,7 +71,7 @@ Die folgende Datei (*server1.html*) soll mit **nginx** präsentiert werden:
 </html>
 ```
 
-
+Nginx kann mit `curl localhost:8080` getestet werden.
 
 {{< collapsible label="docker-compose.yml mit volume" >}}
 ```yaml
@@ -89,11 +89,12 @@ services:
 
 Nun soll der **nginx** auch von **server2** aus erreichbar sein.
 
-Bonuspunkte, wenn nur die Verbindung zum **nginx** auf **server1** funktioniert.
+Nginx kann mit `curl 10.100.1.11:8080` getestet werden.
+
+Bonuspunkte, wenn **nur** die Verbindung zum **nginx** auf **server1** funktioniert.
 
 {{< collapsible label="Lösung Firewall" >}}
 ```yaml
-
 set firewall ipv4 name test-prod rule 110 action accept
 set firewall ipv4 name test-prod rule 110 port 8080
 set firewall ipv4 name test-prod rule 110 destination 10.100.1.11 # ip von server1
