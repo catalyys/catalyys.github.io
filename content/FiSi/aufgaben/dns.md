@@ -1,34 +1,35 @@
 ---
 title: "DNS"
 date: 2024-08-23
-lastmod: 2024-09-05
+lastmod: 2024-10-16
 draft: false
 description: "dns mit IPv4"
 tags: ["fisi", "dns", "übung"]
-featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/dns_azubi.png?raw=true"
+featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/dns_azubi.svg?raw=true"
 type: "übung"
 ---
 
 
 ## grober Überblick der Arbeitsschritte
 
-1. drei Linux VMs installieren (Debian)
+1. zwei Linux VMs installieren (Debian)
 2. auf allen *bind* installieren
 3. alle *bind* konfigurieren
 
 ## Ziele
 
-1. drei DNS Server miteinander verbinden und eine Kaskade bilden
-2. einen mittleren DNS konfigurieren, der alle Zonen kennt
+1. zwei DNS Server miteinander verbinden und eine Kaskade bilden
+2. alle DNS Aufrufe lassen sich von den DNS Servern aus auflösen
 
-![DNS Abbildung](dns_azubi.png)
+![DNS Abbildung](dns_azubi.svg)
 
 ## Anleitung
 
 Diese Aufgabe setzt Debain vorraus. Mit entsprechenden Anpassungen ist alles mit anderen Distributionen möglich.
-Die Installation vom Debian-System wird hier ebenfalls nicht behandelt. Dies muss alleine passieren.
-Wenn beide Debian-VM's installiert sind und miteinander kommunizieren können, kann mit den Aufgaben begonnen werden.
+Die Installation vom Debian-System wird nicht behandelt. Dies muss alleine passieren.
+Wenn alle Debian-VM's installiert sind und miteinander kommunizieren können, kann mit den Aufgaben begonnen werden.
 Für Informationen empfehle ich die [bind9-Doku](https://bind9.readthedocs.io/en/latest/chapter1.html) und die [Debian-Doku](https://wiki.debian.org/Bind9).
+
 ### *bind* installieren
 
 Mit folgendem Befehl könnt ihr *bind* und *dig* installieren:
@@ -43,7 +44,7 @@ wichtige Dateien:
 - `/etc/bind/named.conf`
 - `/var/lib/bind/azubi.dataport.de.zone`
 
-Bei Debian wird im Standart die `named.conf` in mehrere Dateien aufgespaltet. In dieser Übung ist das aber nicht notwendig, da wir nur eine kleine `named.conf`brauchen, die auch in einer Datei übersichtlich.
+Bei Debian wird im Standart die `named.conf` in mehrere Dateien aufgespaltet. In dieser Übung ist das aber nicht notwendig, da wir nur eine kleine `named.conf` brauchen, die auch in einer Datei übersichtlich ist.
 Falls ihr die Datei trotzdem aufteilen wollt, ist das mit dem `include`-Befehl möglich.
 
 ```ini
@@ -56,8 +57,11 @@ include "/etc/bind/named.conf.options";
 
 Zum Troubleshooting könnt ihr folgendes veruschen:
 - `journalctl -eu named.service` für logs
-- `named-checkconf` um die `named.conf`zu validieren
+- `named-checkconf` um die `named.conf` zu validieren
 - `named-checkzone azubi.dataport.de /var/lib/bind/azubi.dataport.de.zone` um die Zonen Config zu validieren
+
+---
+
 ### *bind* konfigurieren auf *ns1*
 
 Die erste Aufgabe ist es, *ns1* zu konfigurieren. Das Ziel dabei soll es sein, Einträge aus `azubi.dataport.de` auflösen zu können und auch vom Upstream DNS `google.de`. Dazu muss eine Zone generiert werden und die `named.conf` angepasst werden.
@@ -68,8 +72,9 @@ IP-Adressen könnt ihr euch dabei selbst ausdenken.
 Anbei sind die Lösungen, falls ihr nicht mehr weiter wisst. Die Configs können auch anders aussehen und sind unten nur minimal/beispielhaft.
 
 Zum testen eurer Umgebung könnt ihr den Befehl `dig` benutzen (`nslookup` ist auch möglich).
-*Was funktionieren sollte*:
-```shell
+
+**Was funktionieren sollte**:
+```bash
 root@ns1# dig +noall +answer google.de @localhost
 
 google.de. 283 IN A 142.250.181.195
@@ -83,7 +88,7 @@ server.azubi.dataport.de. 3600 IN A 192.168.0.2
 ```
 
 {{< collapsible label="Lösung azubi.dataport.de.zone" >}}
-```dns
+```bash
 $ORIGIN azubi.dataport.de.
 $TTL    3600
 @       IN      SOA     ns1.azubi.dataport.de. root.azubi.dataport.de. (
@@ -106,12 +111,7 @@ mail    IN      CNAME   server
 
 {{< collapsible label="Lösung named.conf" >}}
 
-```dns
-acl goodclients {
-    localhost;
-    localnets;
-};
-
+```bash
 options {
   listen-on { 0.0.0.0; };
   directory "/var/cache/bind";
@@ -119,26 +119,27 @@ options {
   forward only;
   forwarders { 1.1.1.1; };
 
-  dnssec-validation yes;
-  allow-query { goodclients; };
+  allow-query { any; };
 };
 
 zone "azubi.dataport.de" IN {
   type primary;
   file "/var/lib/bind/azubi.dataport.de.zone";
-  allow-update { none; };
 };
 ```
 
 {{< /collapsible >}}
 
+---
+
 ### *bind* konfigurieren auf *ns2*
 
-Das ganze soll jetzt auch auf *ns2* passieren. Als Herausforderung für euch werde ich hier keine weiteren Informationen geben. Aus der Grafik sollte entnommen werden können, wie der Aufbau aussehen soll.
+Das ganze soll jetzt auch auf *ns2* passieren. Als Herausforderung für euch werde ich hier keine weiteren Informationen geben. Aus der Grafik sollte entnommen werden können, wie der Aufbau aussehen sollte.
 
 Zum testen eurer Umgebung könnt ihr wieder den Befehl `dig` benutzen (`nslookup` ist auch möglich).
-*Was funktionieren sollte*:
-```shell
+
+**Was funktionieren sollte**:
+```bash
 root@ns2# dig +noall +answer google.de @localhost
 
 google.de. 78 IN A 142.250.180.67
@@ -159,7 +160,7 @@ debian.olli.azubi.dataport.de. 3600 IN A 192.168.2.2
 
 {{< collapsible label="Lösung olli.azubi.dataport.de.zone" >}}
 
-```zone
+```bash
 $ORIGIN olli.azubi.dataport.de.
 $TTL    3600
 @       IN      SOA     ns2.olli.azubi.dataport.de. root.olli.azubi.dataport.de. (
@@ -168,9 +169,9 @@ $TTL    3600
                           600           ; Retry   [10m]
                         86400           ; Expire  [1d]
                           600 )         ; Negative Cache TTL [1h]
->
+
 @       IN      NS      ns2.olli.azubi.dataport.de.
->
+
 ns2     IN      A       192.168.2.1
 debian    IN      A       192.168.2.2
 ```
@@ -182,30 +183,25 @@ debian    IN      A       192.168.2.2
 {{< collapsible label="Lösung named.conf" >}}
 
 ```bash
-acl goodclients {
-    localhost;
-    localnets;
-};
->
 options {
   listen-on { 0.0.0.0; };
   directory "/var/cache/bind";
->
+
   forward only;
   forwarders { 192.168.0.1; };
->
-  dnssec-validation yes;
-  allow-query { goodclients; };
+
+  allow-query { any; };
 };
->
+
 zone "olli.azubi.dataport.de" IN {
   type primary;
   file "/var/lib/bind/olli.azubi.dataport.de.zone";
-  allow-update { none; };
 };
 ```
 
 {{< /collapsible >}}
+
+---
 
 ### redirect Zone
 

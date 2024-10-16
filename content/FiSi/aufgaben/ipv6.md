@@ -40,6 +40,8 @@ Zuerst muss *bind* und *dhcp* installiert werden. Mit folgendem Befehl könnt ih
 apt install bind9 dnsutils isc-dhcp-server
 ```
 
+---
+
 {{% include "/FiSi/aufgaben/dhcp.md" "\*dhcp\* konfigurieren allgemein" %}}
 {{% include "/FiSi/aufgaben/dhcp.md" "Beispiele" %}}
 {{% include "/FiSi/aufgaben/dhcp.md" "Troubleshooting" %}}
@@ -53,8 +55,7 @@ Zunächste müsst ihr euch informieren welche IPv6 Adressen es gibt und welche w
 
 
 {{< notice tip >}}
-es gibt wie bei IPv4 auch **private** IPv6 Adressen, diese werden zwar kaum benutzt, sind aber gut für Test Zwecke.
-**dc** hat auch schon eine gültige IPv6 in diesem Bereich
+Es gibt wie bei IPv4 auch **private** IPv6 Adressen, diese werden zwar kaum benutzt, sind aber gut für Test Zwecke.
 {{< /notice >}}
 
 
@@ -79,6 +80,8 @@ subnet6 fd11:2:3:4::/64 {
 **Was funktionieren sollte**:<br>
 Mit den beiden Clients solltet ihr jetzt IPv6 Adressen bekommen.
 Um die DHCP Sequenz zu starten könnt ihr den Befehl `dhclient -6 ens18` benutzen, dabei ist `ens18` das Interface, auf dem ihr eine neue Lease haben wollt.
+
+---
 
 ### *bind* konfigurieren auf *dc*
 
@@ -146,9 +149,11 @@ zone "azubi.dataport.de" IN {
 ```
 {{< /collapsible >}}
 
+---
+
 ### ping testen
 
-Als kleine Aufgabe, könnt ihr zuletzt versuchen von *client1* *client2* über den *DNS* Namen zu pingen.
+Als kleine Aufgabe, könnt ihr zuletzt versuchen von **client1** **client2** über den **DNS** Namen zu pingen.
 
 {{< collapsible label="Lösung ping IPv6" >}}
 ```bash
