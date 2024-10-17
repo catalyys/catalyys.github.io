@@ -113,7 +113,7 @@ mail    IN      CNAME   server
 
 ```bash
 options {
-  listen-on { 0.0.0.0; };
+  listen-on { any; };
   directory "/var/cache/bind";
 
   forward only;
@@ -184,7 +184,7 @@ debian    IN      A       192.168.2.2
 
 ```bash
 options {
-  listen-on { 0.0.0.0; };
+  listen-on { any; };
   directory "/var/cache/bind";
 
   forward only;
