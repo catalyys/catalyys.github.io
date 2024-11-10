@@ -32,7 +32,7 @@ type: "übung"
 
 ## Anleitung
 
-Ich empfehle euch zuerst zu IPv6 zu belesen und alle Wege, mit denen man IPv6-Adressen verteilen kann. Folgenden [Blogpost](https://metebalci.com/blog/hello-ipv6/) kann ich dazu empfehlen. Er sollte euch eine guten Einblick in IPv6 geben.
+Ich empfehle euch zuerst zu IPv6 zu belesen und alle Wege, mit denen man IPv6-Adressen verteilen kann. Folgenden [Blogpost](https://metebalci.com/blog/hello-ipv6/) kann ich dazu empfehlen. Er sollte euch einen guten Einblick in IPv6 geben.
 
 Den Beitrag von **Request for Comments** zu **IPv6** könnt ihr euch auch gerne anhören.
 <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/de/podcast/rfce014-ipv6/id1082223939?i=1000401347741&l=en-GB"></iframe>
