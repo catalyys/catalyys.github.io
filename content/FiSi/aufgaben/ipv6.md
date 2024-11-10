@@ -1,10 +1,10 @@
 ---
-title: "DHCP und DNS mit IPv6"
+title: "RA und DNS mit IPv6"
 date: 2024-08-28
-lastmod: 2024-09-10
+lastmod: 2024-11-10
 draft: false
-description: "dhcp und dns mit IPv6"
-tags: ["fisi", "dns", "dhcp", "ipv6", "übung"]
+description: "ra und dns mit IPv6"
+tags: ["fisi", "dns", "ra", "ipv6", "übung"]
 featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/dhcp_dns_ipv6_azubi.svg?raw=true"
 type: "übung"
 ---
@@ -19,12 +19,12 @@ type: "übung"
 
 1. drei Linux VMs installieren
 2. *dhcp* und *bind* installieren
-3. *dhcp* konfigurieren
+3. *radvd* konfigurieren
 4. *bind* konfigurieren
 
 ## Ziele
 
-1. einen *IPv6 dhcp* Server verwalten
+1. *IPv6 Router Advertisments* verwalten
 2. *IPv6 bind* Zone pflegen
 3. Systeme miteinander kommunizieren lassen
 
@@ -32,30 +32,63 @@ type: "übung"
 
 ## Anleitung
 
+Ich empfehle euch zuerst zu IPv6 zu belesen und alle Wege, mit denen man IPv6-Adressen verteilen kann. Folgenden [Blogpost](https://metebalci.com/blog/hello-ipv6/) kann ich dazu empfehlen. Er sollte euch eine guten Einblick in IPv6 geben.
+
+Den Beitrag von **Request for Comments** zu **IPv6** könnt ihr euch auch gerne anhören.
+<iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/de/podcast/rfce014-ipv6/id1082223939?i=1000401347741&l=en-GB"></iframe>
+
 ### Installation
 
-Zuerst muss *bind* und *dhcp* installiert werden. Mit folgendem Befehl könnt ihr alle notwendigen Dienste installieren.
+Zuerst muss *bind* und *radvd* installiert werden. Mit folgendem Befehl könnt ihr alle notwendigen Dienste installieren.
 
 ```bash
-apt install bind9 dnsutils isc-dhcp-server
+apt install bind9 dnsutils radvd
 ```
 
 ---
 
-{{% include "/FiSi/aufgaben/dhcp.md" "\*dhcp\* konfigurieren allgemein" %}}
-{{% include "/FiSi/aufgaben/dhcp.md" "Beispiele" %}}
-{{% include "/FiSi/aufgaben/dhcp.md" "Troubleshooting" %}}
+### *radvd* konfigurieren allgemein
+
+wichtige Dateien:
+- `/etc/radvd.conf`
+
+In der `radvd.conf` Datei werden alle Einstellungen vorgenommen, welche für das *Router Advertisment* benötigt werden.
+
+#### *radvd* Beispiele
+
+```bash
+interface enp9s0
+{
+	MinRtrAdvInterval 3;
+	MaxRtrAdvInterval 4;
+	AdvSendAdvert on;
+	AdvManagedFlag on;
+	prefix 2001:db8:1:0::/64
+	{
+		AdvValidLifetime 14300;
+		AdvPreferredLifetime 14200; 
+	};
+};
+```
+
+#### *radvd* Troubleshooting
+
+Zum Troubleshooting könnt ihr folgendes veruschen:
+
+`journalctl -eu radvd.service` für logs
+
+---
 
 {{% include "/FiSi/aufgaben/dns.md" "\*bind\* konfigurieren allgemein" %}}
 {{% include "/FiSi/aufgaben/dns.md" "Troubleshooting" %}}
 
-### *dhcp* konfigurieren auf *dc*
+### *radvd* konfigurieren auf *dc*
 
 Zunächste müsst ihr euch informieren welche IPv6 Adressen es gibt und welche wir für das testen nehmen können.
 
 
 {{< notice tip >}}
-Es gibt wie bei IPv4 auch **private** IPv6 Adressen, diese werden zwar kaum benutzt, sind aber gut für Test Zwecke.
+Es gibt wie bei IPv4 auch **private** IPv6 Adressen, diese werden zwar kaum benutzt, sind aber gut für Test Zwecke. Globale sind natürlich theoretisch auch möglich.
 {{< /notice >}}
 
 
@@ -63,23 +96,31 @@ Es gibt wie bei IPv4 auch **private** IPv6 Adressen, diese werden zwar kaum benu
 >für unseren Zweck reichen die *Unique Local Unicast* Adressen mit einer Range von `fc00::/7`.
 {{< /collapsible >}}
 
-Die erste Aufgabe ist es, den *dhcp* Server auf *dc* zu konfigurieren. Dazu hat *dc* die IPv6 Adresse **fd11:2:3:4::10**. 
-Für das Netz **fd11:2:3:4::/64** muss nun ein gültiger Eintrag in der `dhcpd6.conf` vorgenommen werden.
+Die erste Aufgabe ist es, den **radvd** auf **dc** zu konfigurieren. Dazu bekommt **dc** die IPv6 Adresse **fd11:2:3:4::10**. 
+Für den Prefix **fd11:2:3:4::/64** muss nun ein gültiger Eintrag in der `radvd.conf` vorgenommen werden.
+Informiert euch, wie der DNS Server mit **radvd** übergeben wird.
 
-{{< collapsible label="Lösung dhcpd6.conf" >}}
+{{< collapsible label="Lösung radvd.conf" >}}
  
 ```bash
-subnet6 fd11:2:3:4::/64 {
-		range6 fd11:2:3:4::100 fd11:2:3:4::254;
-	    option dhcp6.name-servers fd11:2:3:4::10;
-	    option dhcp6.domain-search "azubi.dataport.de";
-}
+interface eth0
+{
+	MinRtrAdvInterval 3;
+	MaxRtrAdvInterval 4;
+	AdvSendAdvert on;
+	AdvManagedFlag on;
+	prefix fd11:2:3:4::/64
+	{
+		AdvValidLifetime 14300;
+		AdvPreferredLifetime 14200; 
+	};
+	RDNSS fd11:2:3:4::10 {};
+};
 ```
 {{< /collapsible >}}
 
 **Was funktionieren sollte**:<br>
-Mit den beiden Clients solltet ihr jetzt IPv6 Adressen bekommen.
-Um die DHCP Sequenz zu starten könnt ihr den Befehl `dhclient -6 ens18` benutzen, dabei ist `ens18` das Interface, auf dem ihr eine neue Lease haben wollt.
+Mit den beiden Clients solltet ihr jetzt IPv6 Adressen bekommen (dies sollte komplett automatisch passieren).
 
 ---
 
@@ -97,29 +138,29 @@ Zum testen eurer Umgebung könnt ihr den Befehl `dig` benutzen (`nslookup` ist a
 **Was funktionieren sollte**:
 
 ```bash
-root@ns1# dig +noall +answer mail.azubi.dataport.de @localhost
+$ dig +short mail.azubi.dataport.de AAAA @fd11:2:3:4::10
 
-mail.azubi.dataport.de. 3600 IN CNAME dc.azubi.dataport.de.
-dc.azubi.dataport.de. 3600 IN AAAA fd11:2:3:4::10
+dc.azubi.dataport.de.
+fd11:2:3:4::10
 ```
 
 {{< collapsible label="Lösung azubi.dataport.de.zone" >}}
 ```dns
 $ORIGIN azubi.dataport.de.
-$TTL    3600
-@       IN      SOA     ns1.azubi.dataport.de. root.azubi.dataport.de. (
-                   2007010401           ; Serial
-                         3600           ; Refresh [1h]
-                          600           ; Retry   [10m]
-                        86400           ; Expire  [1d]
-                          600 )         ; Negative Cache TTL [1h]
+$TTL    3600
+@       IN      SOA     ns1.azubi.dataport.de. root.azubi.dataport.de. (
+                   2007010401           ; Serial
+                         3600           ; Refresh [1h]
+                          600           ; Retry   [10m]
+                        86400           ; Expire  [1d]
+                          600 )         ; Negative Cache TTL [1h]
 
-@       IN      NS      ns1.azubi.dataport.de.
+@     IN    NS      ns1.azubi.dataport.de.
 
-ns1     IN      A       fd11:2:3:4::10
-dc    IN      A       fd11:2:3:4::10
+ns1   IN    AAAA    fd11:2:3:4::10
+dc    IN    AAAA    fd11:2:3:4::10
 
- mail    IN      CNAME   dc
+mail  IN    CNAME   dc
 ```
 {{< /collapsible >}}
 
@@ -128,23 +169,18 @@ dc    IN      A       fd11:2:3:4::10
 {{< collapsible label="Lösung named.conf" >}}
 
 ```dns
-acl goodclients {
-    localhost;
-    localnets;
-};
-
 options {
-  listen-on { 0.0.0.0; };
-  directory "/var/cache/bind";
+  listen-on { any; };
+  directory "/var/cache/bind";
 
-  dnssec-validation yes;
-  allow-query { goodclients; };
+  dnssec-validation yes;
+  allow-query { any; };
 };
 
 zone "azubi.dataport.de" IN {
-  type primary;
-  file "/var/lib/bind/azubi.dataport.de.zone";
-  allow-update { none; };
+  type primary;
+  file "/var/lib/bind/azubi.dataport.de.zone";
+  allow-update { none; };
 };
 ```
 {{< /collapsible >}}
