@@ -1,7 +1,7 @@
 ---
 title: "Vorbereitungen"
-date: 2024-09-21
-lastmod: 2024-09-22
+date: 2024-09-25
+lastmod: 2024-10-22
 draft: false
 description: "projekt vorbereitung"
 featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/azubi_umgebung_setup.svg?raw=true"
