@@ -93,6 +93,10 @@ zone "azubi.dataport.de" IN {
 
 Das ganze soll jetzt auch auf *server2* passieren. Als Herausforderung für euch werde ich hier keine weiteren Informationen geben. Aus der Grafik sollte entnommen werden können, wie der Aufbau aussehen sollte.
 
+{{< notice tip >}}
+Denkt an die Firewall.
+{{< /notice >}}
+
 Zum testen eurer Umgebung könnt ihr wieder den Befehl `dig` benutzen (`nslookup` ist auch möglich).
 
 **Was funktionieren sollte**:
