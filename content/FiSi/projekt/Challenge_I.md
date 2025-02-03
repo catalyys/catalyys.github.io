@@ -8,7 +8,7 @@ featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/a
 tags: ["fisi", "übung", "projekt"]
 type: "projekt"
 series: ["Projekt"]
-series_order: 4
+series_order: 5
 showPagination: true
 ---
 

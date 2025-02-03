@@ -8,7 +8,7 @@ featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/a
 tags: ["fisi", "übung", "projekt"]
 type: "projekt"
 series: ["Projekt"]
-series_order: 3
+series_order: 4
 showPagination: true
 ---
 
@@ -101,6 +101,6 @@ set firewall ipv4 name test-prod rule 110 destination 10.100.1.11 # ip von serve
 ```
 {{< /collapsible >}}
 
-
+Legt passend dazu einen DNS Namen an, damit die URL auch mit `curl nginx.azubi.dataport.de:8080` erreichbar ist.
 
 
