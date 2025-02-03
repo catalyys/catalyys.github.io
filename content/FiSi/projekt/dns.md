@@ -1,5 +1,5 @@
 ---
-title: "Docker"
+title: "DNS"
 date: 2024-11-3
 lastmod: 2025-02-03
 draft: false
