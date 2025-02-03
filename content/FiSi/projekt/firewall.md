@@ -9,6 +9,7 @@ tags: ["fisi", "übung", "projekt"]
 type: "projekt"
 series: ["Projekt"]
 series_order: 2
+weight: 20
 showPagination: true
 ---
 
