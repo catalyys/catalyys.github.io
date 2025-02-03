@@ -1,6 +1,6 @@
 ---
 title: "Challenge I"
-date: 2024-09-24
+date: 2024-09-21
 lastmod: 2024-09-27
 draft: true
 description: "projekt challenge 1"

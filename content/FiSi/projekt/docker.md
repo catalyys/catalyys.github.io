@@ -1,6 +1,6 @@
 ---
 title: "Docker"
-date: 2024-09-23
+date: 2024-09-22
 lastmod: 2024-09-27
 draft: false
 description: "projekt docker"
