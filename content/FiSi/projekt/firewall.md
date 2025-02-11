@@ -74,12 +74,13 @@ set interfaces ethernet eth2 address 10.100.2.254/24
 set service dhcp-server shared-network-name test subnet 10.100.2.0/24 option default-router 10.100.2.254
 set service dhcp-server shared-network-name test subnet 10.100.2.0/24 range 0 start 10.100.2.10
 set service dhcp-server shared-network-name test subnet 10.100.2.0/24 range 0 stop 10.100.2.100
-
+set service dhcp-server shared-network-name test subnet 10.100.2.0/24 subnet-id '2'
 
 set interfaces ethernet eth1 address 10.100.1.254/24
 set service dhcp-server shared-network-name prod subnet 10.100.1.0/24 option default-router 10.100.1.254
 set service dhcp-server shared-network-name prod subnet 10.100.1.0/24 range 0 start 10.100.1.10
 set service dhcp-server shared-network-name prod subnet 10.100.1.0/24 range 0 stop 10.100.1.100
+set service dhcp-server shared-network-name test subnet 10.100.1.0/24 subnet-id '1'
 ```
 {{< /collapsible >}}
 
@@ -138,9 +139,7 @@ set nat source rule 110 translation address masquerade
 ```
 {{< /collapsible >}}
 
-## Quick Start
 
-ToDo: Ansible playbook schreiben
 
 
 
