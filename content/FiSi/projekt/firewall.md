@@ -114,10 +114,10 @@ set firewall zone test from prod firewall name test-prod
 
 
 set firewall zone test default-action drop
-set firewall zone test interface eth2
+set firewall zone test member interface eth2
 
 set firewall zone prod default-action drop
-set firewall zone prod interface eth1
+set firewall zone prod member interface eth1
 ```
 {{< /collapsible >}}
 
