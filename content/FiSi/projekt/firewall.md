@@ -87,37 +87,30 @@ set service dhcp-server shared-network-name prod subnet 10.100.1.0/24 subnet-id 
 ## Firewall
 
 Im nächsten Schritt wird die Firewall aktiviert. Dabei soll erstmal nur ICMP erlaubt werden zwischen den Netzen.
+Aktiviert dabei auch 
 
-Hierbei schaut ihr euch die Doku zur [Zone Based Firewall](https://docs.vyos.io/en/latest/configuration/firewall/zone.html) an und wieder den Abschnitt dazu im [Quick Start Guide](https://docs.vyos.io/en/latest/quick-start.html).
+Da VyOS auf Linux basiert, werden die Firewall Regeln über iptables/nftables gesteuert. Dabei werden Chains benutzt, um die Regeln zu gruppieren und zu unterteilen. Für die Übung reichen die Standard Chains die schon vorhanden sind. Die Input Chain ist für den Traffic, der für die Firewall bestimmt ist und die Forward Chain für den restlichen Traffic. Das heißt alle Regeln zwischen den Netzen muss in die Forward Chain.
 
-{{< alert >}}
-Damit das nicht zu Kompliziert wird, könnt ihr nur eine Chain nehmen und in dieser alle Regeln verwalten.
-{{< /alert >}}
+Um einen genaueren Blick zu erhalten könnt ihr euch folgende Artikel durchlesen:
+- [Quick Start Guide](https://docs.vyos.io/en/latest/quick-start.html#firewall)
+- [Configuration Guide -> Firewall](https://docs.vyos.io/en/latest/configuration/firewall/)
+- [Zone Based Firewall](https://docs.vyos.io/en/latest/configuration/firewall/zone.html)
+
 
 {{< collapsible label="Lösung Firewall setup" >}}
 ```
+# globale optionen
 set firewall global-options state-policy established action accept
 set firewall global-options state-policy related action accept
 set firewall global-options state-policy invalid action drop
 
-set firewall ipv4 name test-prod default-action drop
-set firewall ipv4 name test-prod default-log
+# default action drop und log aktivieren
+set firewall ipv4 forward filter default-action drop
+set firewall ipv4 forward filter default-log
 
-
-
-set firewall ipv4 name test-prod rule 100 action accept
-set firewall ipv4 name test-prod rule 100 protocol icmp
-
-set firewall zone prod from test firewall name test-prod
-set firewall zone test from prod firewall name test-prod
-
-
-
-set firewall zone test default-action drop
-set firewall zone test member interface eth2
-
-set firewall zone prod default-action drop
-set firewall zone prod member interface eth1
+# regel 100: accept icmp
+set firewall ipv4 forward filter rule 100 action accept
+set firewall ipv4 forward filter rule 100 protocol icmp
 ```
 {{< /collapsible >}}
 
