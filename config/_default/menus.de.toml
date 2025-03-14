@@ -5,6 +5,16 @@
 name = "FiSi"
 pageRef = "FiSi"
 #identifier = "fNlQBUpsrl"
+weight = 11
+
+[[main]]
+name = "Aufgaben"
+pageRef = "FiSi/aufgaben"
+weight = 10
+
+[[main]]
+name = "Projekt"
+pageRef = "FiSi/projekt"
 weight = 10
 
 [[footer]]

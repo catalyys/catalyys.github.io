@@ -5,8 +5,22 @@ none = "none"
 name = "FiSi"
 pre = "none"
 pageRef = "FiSi"
-identifier = "fNlQBUpsrl"
-weight = 9999
+weight = 10
+
+[[main]]
+name = "Doku"
+pageRef = "FiSi/doku"
+weight = 10
+
+[[Aufgaben]]
+name = "Aufgaben"
+pageRef = "FiSi/aufgaben"
+weight = 10
+
+[[Projekt]]
+name = "Projekt"
+pageRef = "FiSi/projekt"
+weight = 10
 
 [[footer]]
 none = "none"

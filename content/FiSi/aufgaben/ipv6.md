@@ -37,6 +37,9 @@ Ich empfehle euch zuerst zu IPv6 zu belesen und alle Wege, mit denen man IPv6-Ad
 Den Beitrag von **Request for Comments** zu **IPv6** könnt ihr euch auch gerne anhören.
 <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/de/podcast/rfce014-ipv6/id1082223939?i=1000401347741&l=en-GB"></iframe>
 
+Hier auch nochmal eine Übersicht für SLAAC:
+![SLAAC](ipv6_slaac.svg)
+
 ### Installation
 
 Zuerst muss *bind* und *radvd* installiert werden. Mit folgendem Befehl könnt ihr alle notwendigen Dienste installieren.

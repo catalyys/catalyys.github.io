@@ -7,3 +7,10 @@ description: "ipv6 überblick"
 tags: ["fisi", "ipv6", "doku"]
 type: "doku"
 ---
+
+
+
+![SLAAC](ipv6_slaac.svg)
+
+
+

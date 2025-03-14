@@ -25,7 +25,9 @@ Falls jemand sich für eine andere Firewall entscheidet, würde ich auch gerne e
 
 ## Vorbereitungen
 
-2 Linux VMs können schon installiert werden und danach in ein privates Netz gepackt werden. und danach in ein privates Netz gepackt werden.
+2 Linux VMs können schon installiert werden und danach in ein privates Netz gepackt werden.
+
+Die Debian ISO bekommt ihr von [hier](https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/).
 
 Dabei kommt eine VM in **prod** und eine in **test**.
 
