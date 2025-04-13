@@ -95,9 +95,11 @@ Bonuspunkte, wenn **nur** die Verbindung zum **nginx** auf **server1** funktioni
 
 {{< collapsible label="Lösung Firewall" >}}
 ```yaml
-set firewall ipv4 name test-prod rule 110 action accept
-set firewall ipv4 name test-prod rule 110 port 8080
-set firewall ipv4 name test-prod rule 110 destination 10.100.1.11 # ip von server1
+# regel 110: accept port 8080
+set firewall ipv4 forward filter rule 110 action accept
+set firewall ipv4 forward filter rule 110 destination port 8080
+set firewall ipv4 forward filter rule 110 protocol tcp
+set firewall ipv4 forward filter rule 110 destination address 10.100.1.10 # ip von server1
 ```
 {{< /collapsible >}}
 
