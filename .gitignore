@@ -3,4 +3,4 @@
 .pytest_cache
 .venv
 .vagrant
-**__pycache__**
+**/__pycache__**
