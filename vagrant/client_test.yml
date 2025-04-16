@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  vars:
+    named: "test_named.conf"
+    zone: "test.azubi.dataport.de.zone"
+    net: 2
+
+  tasks:
+    - include_tasks: tasks/common.yml
+    - include_tasks: tasks/dns.yml
+
+

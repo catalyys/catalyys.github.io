@@ -1,0 +1,24 @@
+- name: delete default route on eth0
+  command: ip route del default dev eth0
+
+- name: add default route on eth1
+  command: "ip route add default via 10.100.{{ net }}.254 dev eth1"
+
+- name: change /etc/resolv.conf
+  ansible.builtin.copy:
+    dest: /etc/resolv.conf
+    content: |
+      nameserver 1.1.1.1
+      nameserver 1.0.0.1
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: copy sources.list
+  ansible.builtin.copy:
+    src: "configs/sources.list"
+    dest: "/etc/apt/sources.list"
+    owner: root
+    group: root
+    mode: '0644'
+

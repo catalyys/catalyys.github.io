@@ -1,0 +1,39 @@
+- name: update all packages to their latest version
+  ansible.builtin.apt:
+    update-cache: true
+    upgrade: yes
+
+- name: install packages
+  apt:
+    pkg:
+      - fish
+      - vim
+      - docker
+      - docker-compose
+    state: present
+
+- name: create dir
+  ansible.builtin.file:
+    path: /opt/nginx
+    state: directory
+
+- name: copy html
+  ansible.builtin.copy:
+    src: configs/docker/server1.html
+    dest: /opt/nginx/server1.html
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: copy compose
+  ansible.builtin.copy:
+    src: configs/docker/docker-compose.yml
+    dest: /opt/nginx/docker-compose.yml
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: compsoe up
+  ansible.builtin.shell: docker-compose up -d
+  args:
+    chdir: /opt/nginx/

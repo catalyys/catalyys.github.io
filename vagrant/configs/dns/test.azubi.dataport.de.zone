@@ -1,0 +1,13 @@
+$ORIGIN test.azubi.dataport.de.
+$TTL    3600
+@       IN      SOA     server2.test.azubi.dataport.de. root.test.azubi.dataport.de. (
+                   2007010401           ; Serial
+                         3600           ; Refresh [1h]
+                          600           ; Retry   [10m]
+                        86400           ; Expire  [1d]
+                          600 )         ; Negative Cache TTL [1h]
+
+@       IN      NS      server2.test.azubi.dataport.de.
+
+server2     IN      A       10.100.2.10
+debian    IN      A       10.100.2.9
