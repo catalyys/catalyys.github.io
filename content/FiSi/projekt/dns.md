@@ -45,45 +45,16 @@ docker.azubi.dataport.de. 3600 IN A 10.100.1.9
 ```
 
 {{< collapsible label="Lösung azubi.dataport.de.zone" >}}
-```bash
-$ORIGIN azubi.dataport.de.
-$TTL    3600
-@       IN      SOA     server1.azubi.dataport.de. root.azubi.dataport.de. (
-                   2007010401           ; Serial
-                         3600           ; Refresh [1h]
-                          600           ; Retry   [10m]
-                        86400           ; Expire  [1d]
-                          600 )         ; Negative Cache TTL [1h]
 
-@       IN      NS      server1.azubi.dataport.de.
+{{< code language="zone" source="/vagrant/configs/dns/azubi.dataport.de.zone" id="zone">}}
 
-server1     IN      A       10.100.1.10
-docker    IN      A       10.100.1.9
-
-mail    IN      CNAME   server
-```
 {{< /collapsible >}}
 
 <br>
 
 {{< collapsible label="Lösung named.conf" >}}
 
-```bash
-options {
-  listen-on { any; };
-  directory "/var/cache/bind";
-
-  forward only;
-  forwarders { 1.1.1.1; };
-
-  allow-query { any; };
-};
-
-zone "azubi.dataport.de" IN {
-  type primary;
-  file "/var/lib/bind/azubi.dataport.de.zone";
-};
-```
+{{< code language="bind" source="/vagrant/configs/dns/prod_named.conf" id="zone">}}
 
 {{< /collapsible >}}
 
@@ -121,21 +92,7 @@ debian.test.azubi.dataport.de. 3600 IN A 10.100.2.9
 
 {{< collapsible label="Lösung test.azubi.dataport.de.zone" >}}
 
-```bash
-$ORIGIN test.azubi.dataport.de.
-$TTL    3600
-@       IN      SOA     server2.test.azubi.dataport.de. root.test.azubi.dataport.de. (
-                   2007010401           ; Serial
-                         3600           ; Refresh [1h]
-                          600           ; Retry   [10m]
-                        86400           ; Expire  [1d]
-                          600 )         ; Negative Cache TTL [1h]
-
-@       IN      NS      server2.test.azubi.dataport.de.
-
-server2     IN      A       10.100.2.10
-debian    IN      A       10.100.2.9
-```
+{{< code language="zone" source="/vagrant/configs/dns/test.azubi.dataport.de.zone" id="zone">}}
 
 {{< /collapsible >}}
 
@@ -143,22 +100,7 @@ debian    IN      A       10.100.2.9
 
 {{< collapsible label="Lösung named.conf" >}}
 
-```bash
-options {
-  listen-on { any; };
-  directory "/var/cache/bind";
-
-  forward only;
-  forwarders { 10.100.1.10; };
-
-  allow-query { any; };
-};
-
-zone "test.azubi.dataport.de" IN {
-  type primary;
-  file "/var/lib/bind/test.azubi.dataport.de.zone";
-};
-```
+{{< code language="bind" source="/vagrant/configs/dns/test_named.conf" id="zone">}}
 
 {{< /collapsible >}}
 
@@ -213,18 +155,14 @@ zone "test.azubi.dataport.de" IN {
 #### forward
 
 Die forward Zone wird einfach auf *server1* in der `named.conf` angelegt und schickt sämtliche Anfrage von der Domäne an den forwarder. 
+Es wird dazu nur noch ein **NS** Eintrag für den nameserver in der anderen Domäne gebraucht.
 
 
-{{< collapsible label="Lösung named.conf forward Zone" >}}
+{{< collapsible label="Lösung forward Zone" >}}
 
-```bind
-...
-zone "test.azubi.dataport.de" IN {
-  type forward;
-  forward only;
-  forwarders { 10.100.2.10; };
-};
-```
+{{< code language="zone" source="/vagrant/configs/dns/azubi.dataport.de.zone" id="forward">}}
+
+{{< code language="zone" source="/vagrant/configs/dns/prod_named.conf" id="forward">}}
 
 {{< /collapsible >}}
 

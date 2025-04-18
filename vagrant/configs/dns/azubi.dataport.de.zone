@@ -1,3 +1,4 @@
+; START zone
 $ORIGIN azubi.dataport.de.
 $TTL    3600
 @       IN      SOA     server1.azubi.dataport.de. root.azubi.dataport.de. (
@@ -7,11 +8,15 @@ $TTL    3600
                         86400           ; Expire  [1d]
                           600 )         ; Negative Cache TTL [1h]
 
-@       IN      NS      server1.azubi.dataport.de.
-test.azubi.dataport.de.       IN      NS      server1.azubi.dataport.de.
+@                                   IN      NS      server1.azubi.dataport.de.
 
-server1     IN      A       10.100.1.10
-server2.test.azubi.dataport.de.     IN      A       10.100.2.10
-docker    IN      A       10.100.1.9
+server1                             IN      A       10.100.1.10
+docker                              IN      A       10.100.1.9
+mail                                IN      CNAME   server
+; END zone
 
-mail    IN      CNAME   server
+; START forward
+test.azubi.dataport.de.             IN      NS      server2.azubi.dataport.de. ; für die forward zone
+server2.test.azubi.dataport.de.     IN      A       10.100.2.10 ; für die forward zone
+; END forward
+

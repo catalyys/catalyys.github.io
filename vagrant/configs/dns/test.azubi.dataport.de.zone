@@ -1,3 +1,4 @@
+; START zone
 $ORIGIN test.azubi.dataport.de.
 $TTL    3600
 @       IN      SOA     server2.test.azubi.dataport.de. root.test.azubi.dataport.de. (
@@ -11,3 +12,4 @@ $TTL    3600
 
 server2     IN      A       10.100.2.10
 debian    IN      A       10.100.2.9
+; END zone

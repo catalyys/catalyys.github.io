@@ -1,0 +1,80 @@
+{{ $language := .Get "language" }}
+{{ $source := .Get "source" }}
+{{ $options := .Get "options" }}
+{{ $id := .Get "id" }}
+
+{{ $uniq := (now.UnixNano | string) }}
+
+{{ with $source | readFile }}
+  {{ $snippet := . }}
+
+  {{ if $id }}
+    {{ $lines := split $snippet "\n" }}
+
+    {{ $startTag := printf "START %s" $id }}
+    {{ $endTag := printf "END %s" $id }}
+
+    {{ $startl := -1 }}
+    {{ $endl := -1 }}
+
+    {{/* Find the lines that ends with the start and end tags. */}}
+    {{ range $index, $line := $lines }}
+      {{ if hasSuffix $line $startTag }}
+        {{ $startl = $index }}
+      {{ else if hasSuffix $line $endTag }}
+        {{ $endl = $index }}
+      {{ end }}
+    {{ end }}
+
+    {{/* Let's add some basic assertions. */}}
+    {{ if lt $startl 0 }}
+      {{ errorf "Named snippet is missing START tag" }}
+    {{ end }}
+
+    {{ if lt $endl 0 }}
+      {{ errorf "Named snippet is missing END tag" }}
+    {{ end }}
+
+    {{/* Size of the snippet in number of lines. */}}
+    {{ $snippetLen := sub (sub $endl $startl) 1 }}
+
+    {{/* Create slice with only the lines between the tags. */}}
+    {{ $includedLines := first $snippetLen (after (add $startl 1) $lines) }}
+
+    {{/* Join the lines into the final snippet. */}}
+    {{ $snippet = delimit $includedLines "\n" }}
+  {{ end }}
+
+  {{ highlight $snippet $language $options }}
+
+  {{ $wget := printf "wget https://raw.githubusercontent.com/catalyys/catalyys.github.io/refs/heads/main%s" $source }}
+  {{ $codeId := printf "wget-cmd-%s" $uniq }}
+  {{ $btnId := printf "copy-btn-%s" $uniq }}
+  {{ $msgId := printf "copy-msg-%s" $uniq }}
+
+  <div style="margin-top: 0.5em; font-size: 0.7em; color: #aaaaaa;">
+    <code id="{{ $codeId }}">{{ $wget }}</code>
+    <button 
+      id="{{ $btnId }}"
+      onclick="(function(){
+        const btn = document.getElementById('{{ $btnId }}');
+        const code = document.getElementById('{{ $codeId }}').innerText;
+        const originalText = btn.innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          btn.innerText = 'Copied!';
+          btn.classList.add('bg-green-600');
+          btn.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+          setTimeout(() => {
+            btn.innerText = originalText;
+            btn.classList.remove('bg-green-600');
+            btn.classList.add('bg-blue-500', 'hover:bg-blue-600');
+          }, 1500);
+        });
+      })()"
+      class="text-sm bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded transition duration-150 ease-in-out"
+    >
+      Copy
+    </button>
+  </div>
+{{ end }}
+
