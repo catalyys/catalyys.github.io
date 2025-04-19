@@ -114,6 +114,12 @@ Damit die *name*.azubi.dataport.de Zone auf dem *server1* auflösbar ist, gibt e
 Bei der secondary Zone muss die Config auf *server1* **und** auf *server2* angepasst werden. Eine forward Zone braucht nur eine Anpassung auf *server1*. Daraus resultieren noch weitere Vor- und Nachteile. Beide Varianten haben aber die Anwendungszwecke.
 Ihr könnt euch für eine der beiden Varianten entscheiden und diese dann einrichten. Lösungen haben ich für beide Varianten.
 
+{{< collapsible label="Lösung Firewall" >}}
+
+{{< code language="vyos" source="/vagrant/configs/vyos/vyos.cfg" id="firewall_dns">}}
+
+{{< /collapsible >}}
+
 #### secondary Zone
 
 Für eine secondary Zone müsst ihr auf *server2* den Transfer der Zone erlauben. Danach könnt ihr die Zone auf *server1* anlegen und transferieren.

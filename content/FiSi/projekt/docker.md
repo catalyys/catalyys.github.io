@@ -48,13 +48,9 @@ Die Aufgabe ist also, den `docker run` Befehl in eine **compose** Datei umzuwand
 Um eine Container mit `docker-compose` zu starten, könnt ihr im Ordner mit der `docker-compose.yml` Datei den Befehl `docker-compose up` ausführen.
 
 {{< collapsible label="docker-compose.yml" >}}
-```yaml
-services:
-  nginx:
-    image: nginx:latest
-    ports:
-      - "8080:80"
-```
+
+{{< code language="yaml" source="/vagrant/configs/docker/docker-compose.yml" id="nginx">}}
+
 {{< /collapsible >}}
 
 Im zweiten Schritt, soll nun die **nginx** config angepasst werden.
@@ -63,26 +59,14 @@ Das macht man mit *volume mounts*.
 
 Die folgende Datei (*server1.html*) soll mit **nginx** präsentiert werden:
 
-```html
-<html>
-  <body>
-    Azubi server1
-  </body>
-</html>
-```
+{{< code language="html" source="/vagrant/configs/docker/server1.html">}}
 
 Nginx kann mit `curl localhost:8080` getestet werden.
 
 {{< collapsible label="docker-compose.yml mit volume" >}}
-```yaml
-services:
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./server1.html:/usr/share/nginx/html/index.html
-    ports:
-      - "8080:80"
-```
+
+{{< code language="yaml" source="/vagrant/configs/docker/docker-compose.yml">}}
+
 {{< /collapsible >}}
 
 ## Docker Produktion
@@ -94,13 +78,9 @@ Nginx kann mit `curl 10.100.1.11:8080` getestet werden.
 Bonuspunkte, wenn **nur** die Verbindung zum **nginx** auf **server1** funktioniert.
 
 {{< collapsible label="Lösung Firewall" >}}
-```yaml
-# regel 110: accept port 8080
-set firewall ipv4 forward filter rule 110 action accept
-set firewall ipv4 forward filter rule 110 destination port 8080
-set firewall ipv4 forward filter rule 110 protocol tcp
-set firewall ipv4 forward filter rule 110 destination address 10.100.1.10 # ip von server1
-```
+
+{{< code language="vyos" source="/vagrant/configs/vyos/vyos.cfg" id="firewall_8080">}}
+
 {{< /collapsible >}}
 
 Legt passend dazu einen DNS Namen an, damit die URL auch mit `curl nginx.azubi.dataport.de:8080` erreichbar ist.

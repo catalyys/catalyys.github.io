@@ -57,7 +57,6 @@ set system option keyboard-layout de
 set interfaces ethernet eth0 address dhcp
 
 set service ssh port 22
-set service ssh listen-address <erhaltene IP Adresse>
 ```
 
 
@@ -69,19 +68,9 @@ Dazu könnt ihr den [Quick Start Guide](https://docs.vyos.io/en/latest/quick-sta
 Sobald alles funktioniert, sollten eure Linux VMs eine IP erhalten
 
 {{< collapsible label="Lösung DHCP setup" >}}
-```
-set interfaces ethernet eth2 address 10.100.2.254/24
-set service dhcp-server shared-network-name test subnet 10.100.2.0/24 option default-router 10.100.2.254
-set service dhcp-server shared-network-name test subnet 10.100.2.0/24 range 0 start 10.100.2.10
-set service dhcp-server shared-network-name test subnet 10.100.2.0/24 range 0 stop 10.100.2.100
-set service dhcp-server shared-network-name test subnet 10.100.2.0/24 subnet-id '2'
 
-set interfaces ethernet eth1 address 10.100.1.254/24
-set service dhcp-server shared-network-name prod subnet 10.100.1.0/24 option default-router 10.100.1.254
-set service dhcp-server shared-network-name prod subnet 10.100.1.0/24 range 0 start 10.100.1.10
-set service dhcp-server shared-network-name prod subnet 10.100.1.0/24 range 0 stop 10.100.1.100
-set service dhcp-server shared-network-name prod subnet 10.100.1.0/24 subnet-id '1'
-```
+{{< code language="vyos" source="/vagrant/configs/vyos/vyos.cfg" id="dhcp">}}
+
 {{< /collapsible >}}
 
 ## Firewall
@@ -100,20 +89,9 @@ Um einen genaueren Blick zu erhalten könnt ihr euch folgende Artikel durchlesen
 
 
 {{< collapsible label="Lösung Firewall setup" >}}
-```
-# globale optionen
-set firewall global-options state-policy established action accept
-set firewall global-options state-policy related action accept
-set firewall global-options state-policy invalid action drop
 
-# default action drop und log aktivieren
-set firewall ipv4 forward filter default-action drop
-set firewall ipv4 forward filter default-log
+{{< code language="vyos" source="/vagrant/configs/vyos/vyos.cfg" id="firewall">}}
 
-# regel 100: accept icmp
-set firewall ipv4 forward filter rule 100 action accept
-set firewall ipv4 forward filter rule 100 protocol icmp
-```
 {{< /collapsible >}}
 
 ## NAT
@@ -131,15 +109,9 @@ Wenn die Antwort zurückkommt, wandelt der Router die öffentliche IP-Adresse wi
 Dazu hilt die Doku zu [NAT](https://docs.vyos.io/en/latest/configuration/nat/nat44.html) und mal wieder der [Quick Start Guide](https://docs.vyos.io/en/latest/quick-start.html).
 
 {{< collapsible label="Lösung NAT setup" >}}
-```
-set nat source rule 100 outbound-interface name eth0
-set nat source rule 100 source address 10.100.1.0/24
-set nat source rule 100 translation address masquerade
 
-set nat source rule 110 outbound-interface name eth0
-set nat source rule 110 source address 10.100.2.0/24
-set nat source rule 110 translation address masquerade
-```
+{{< code language="vyos" source="/vagrant/configs/vyos/vyos.cfg" id="nat">}}
+
 {{< /collapsible >}}
 
 
