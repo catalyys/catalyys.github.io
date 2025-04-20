@@ -30,7 +30,7 @@ Als guter Kollege, kann ich euch folgende Aussage geben:
 docker-compose Datei für den Server:
 ```yaml
 services:
-  turbine:
+  challenge:
     container_name: azubi-fw-challenge
     image: catalyyst/azubi-fw-challenge:latest
     network_mode: "host"
@@ -42,12 +42,12 @@ services:
 docker-compose Datei für den Client:
 ```yaml
 services:
-  turbine:
+  challenge:
     container_name: azubi-fw-challenge
     image: catalyyst/azubi-fw-challenge:latest
     command: ./azubi-fw-challenge client
     environment:
-      SERVER_ADDRESS: "10.100.1.11"
+      SERVER_ADDRESS: "10.100.1.10"
 ```
 > nicht vergessen, **SERVER_ADDRESS** zu ändern, auf die IP vom Docker Server.
 

@@ -27,6 +27,10 @@ Unter jedem Ausschnitt einer Datei, wird der Befehl stehen, mit dem ihr euch die
 Das herunterladen könnt ihr dann über `wget` direkt auf der VM machen.
 In der Datei sind oft *START* und *END* Blöcke, diese sind nur Kommentare, damit ich den Code als Abschnitte hier im Blog verwenden kann. Diese können ignoriert oder rausgelöscht werden.
 
+Die Configs sind alle getestet und sollten also funktionieren. Falls ihr Fehler findet, könnt ihr gerne ein Issue auf Github aufmachen.
+Im [vagrant](https://github.com/catalyys/catalyys.github.io/tree/main/vagrant) Ordner befinden sich alle Configs und auch ein Vagrantfile + Ansible, um alle VMs automatisch zu provisionieren.
+Dazu sind dort auch die Tests, welche mit pytest geschrieben sind. Dadurch könnt ihr auch eure Configs testen und vergleichen.
+
 ## Vorbereitungen
 
 2 Linux VMs können schon installiert werden und danach in ein privates Netz gepackt werden.

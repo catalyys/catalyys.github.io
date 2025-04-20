@@ -22,5 +22,11 @@ name = "Projekt"
 pageRef = "FiSi/projekt"
 weight = 10
 
+[[main]]
+  name = "GitHub"
+  url = "https://github.com/catalyys/catalyys.github.io"
+  weight = 50
+  pre = "<i class='fab fa-github'></i>"
+
 [[footer]]
 none = "none"

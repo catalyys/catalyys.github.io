@@ -5,17 +5,23 @@
 name = "FiSi"
 pageRef = "FiSi"
 #identifier = "fNlQBUpsrl"
-weight = 11
+weight = 30
 
 [[main]]
 name = "Aufgaben"
 pageRef = "FiSi/aufgaben"
-weight = 10
+weight = 20
 
 [[main]]
 name = "Projekt"
 pageRef = "FiSi/projekt"
 weight = 10
+
+[[main]]
+  identifier = "github"
+  pre = "github"
+  url = "https://github.com/catalyys/catalyys.github.io"
+  weight = 60
 
 [[footer]]
 none = "none"
