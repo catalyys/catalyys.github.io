@@ -1,4 +1,21 @@
-html {
-  font-size: 13pt;
+@font-face {
+    font-family: Hack;
+    src: url('/fonts/Hack-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrainsMono-Regular.ttf');
+}
+
+html {
+    font-size: 13pt;
+}
+
+:root {
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+code {
+  font-family: var(--font-mono) !important;
+}

@@ -17,9 +17,9 @@
   --color-primary-100: 254, 249, 195;
   --color-primary-200: 254, 240, 138;
   --color-primary-300: 253, 224, 71;
-  --color-primary-400: 240, 204, 21; /* link color */
+  --color-primary-400: 240, 204, 21; /* link color dark */
   --color-primary-500: 234, 179, 8;
-  --color-primary-600: 202, 138, 4; /* tag border */
+  --color-primary-600: 202, 138, 4; /* tag border + link color light */
   --color-primary-700: 161, 98, 7;
   --color-primary-800: 133, 77, 14;
   --color-primary-900: 113, 63, 18;
