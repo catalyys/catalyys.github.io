@@ -12,7 +12,7 @@ $TTL    3600
 
 server1                             IN      A       10.100.1.10
 docker                              IN      A       10.100.1.9
-mail                                IN      CNAME   server
+mail                                IN      CNAME   docker
 ; END zone
 
 ; START forward
