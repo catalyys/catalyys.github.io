@@ -40,7 +40,7 @@ google.de. 283 IN A 142.250.181.195
 ```bash
 root@server1# dig +short mail.azubi.dataport.de @localhost
 
-mail.azubi.dataport.de. 3600 IN CNAME server.azubi.dataport.de.
+mail.azubi.dataport.de. 3600 IN CNAME docker.azubi.dataport.de.
 docker.azubi.dataport.de. 3600 IN A 10.100.1.9
 ```
 
