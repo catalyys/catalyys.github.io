@@ -2,7 +2,7 @@
 title: "Challenge I"
 date: 2024-09-21
 lastmod: 2024-09-27
-draft: true
+draft: false
 description: "projekt challenge 1"
 featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/azubi_umgebung_setup.svg?raw=true"
 tags: ["fisi", "übung", "projekt"]

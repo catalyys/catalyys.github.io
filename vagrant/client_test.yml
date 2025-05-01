@@ -4,7 +4,7 @@
   vars:
     named: "test_named.conf"
     zone: "test.azubi.dataport.de.zone"
-    net: 2
+    gateway: "10.100.2.254"
 
   tasks:
     - include_tasks: tasks/common.yml

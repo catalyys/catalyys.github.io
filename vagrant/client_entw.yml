@@ -4,11 +4,10 @@
   vars:
     named: "prod_named.conf"
     zone: "azubi.dataport.de.zone"
-    gateway: "10.100.1.254"
+    gateway: "fd11:2:3:4::10"
+    v6: "-6"
 
   tasks:
     - include_tasks: tasks/common.yml
-    - include_tasks: tasks/dns.yml
-    - include_tasks: tasks/docker.yml
 
 

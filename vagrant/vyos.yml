@@ -9,14 +9,20 @@
       vyos.vyos.vyos_interfaces:
         config:
           - name: eth0
-            description: Configured by Ansible
+            description: virtual box nat
             enabled: true
           - name: eth1
-            description: Configured by Ansible
+            description: prod
             enabled: true
           - name: eth2
-            description: Configured by Ansible
+            description: test
             enabled: true
+          - name: eth3
+            description: entw
+            enabled: true
+          #- name: eth4
+          #  description: Configured by Ansible
+          #  enabled: true
         state: merged
 
     - name: configure l3 interfaces
@@ -31,6 +37,15 @@
           - name: eth2
             ipv4:
               - address: 10.100.2.254/24
+          - name: eth3
+            ipv6:
+              - address: fd11:2:3:4::10/64
+              - address: fd11:2:3:4::9/64
+          #- name: eth4
+          #  ipv4:
+          #    - address: dhcp
+          #  ipv6:
+          #    - address: dhcpv6
         state: merged
 
     - name: filter out comments
@@ -38,10 +53,6 @@
         grep -v '^\s*#' configs/vyos/vyos.cfg | grep -v -e '^$'
       register: config
       delegate_to: localhost
-
-    - name: debug
-      debug:
-        var: config
 
     - name: configure vyos
       vyos.vyos.vyos_config:
