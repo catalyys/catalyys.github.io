@@ -89,7 +89,6 @@ Zum Troubleshooting könnt ihr folgendes veruschen:
 
 Zunächste müsst ihr euch informieren welche IPv6 Adressen es gibt und welche wir für das testen nehmen können.
 
-
 {{< notice tip >}}
 Es gibt wie bei IPv4 auch **private** IPv6 Adressen, diese werden zwar kaum benutzt, sind aber gut für Test Zwecke. Globale sind natürlich theoretisch auch möglich.
 {{< /notice >}}
