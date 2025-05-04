@@ -14,11 +14,6 @@ Vagrant.configure("2") do |config|
     vyos.vm.network "private_network", ip: "fd11:2:3:4::10", netmask: "64", virtualbox__intnet: "entw"
     #config.vm.disk :disk, size: "20GB", primary: true
     #vyos.vm.network "private_network", type: "dhcp"
-
-    vyos.vm.provision "ansible" do |ansible|
-      ansible.playbook = "vyos.yml"
-      #ansible.verbose = "vvv"
-    end
   end
 
  # ---------------- Prod VM ----------------
@@ -34,10 +29,6 @@ Vagrant.configure("2") do |config|
     #config.vm.disk :disk, size: "20GB", primary: true
     #client_prod.vm.network "private_network", type: "dhcp"
     client_prod.vm.network "private_network", type: "dhcp", virtualbox__intnet: "prod"
-
-    client_prod.vm.provision "ansible" do |ansible|
-      ansible.playbook = "client_prod.yml"
-    end
   end
 
  # ---------------- Entw VM ----------------
@@ -53,10 +44,6 @@ Vagrant.configure("2") do |config|
     #config.vm.disk :disk, size: "20GB", primary: true
     #client_test.vm.network "private_network", type: "dhcp"
     client_entw.vm.network "private_network", type: "dhcp", virtualbox__intnet: "entw"
-
-    client_entw.vm.provision "ansible" do |ansible|
-      ansible.playbook = "client_entw.yml"
-    end
   end
 
  # ---------------- Test VM ----------------
@@ -73,8 +60,34 @@ Vagrant.configure("2") do |config|
     #client_test.vm.network "private_network", type: "dhcp"
     client_test.vm.network "private_network", type: "dhcp", virtualbox__intnet: "test"
 
+ # ---------------- ANSIBLE ----------------
     client_test.vm.provision "ansible" do |ansible|
-      ansible.playbook = "client_test.yml"
+     ansible.playbook = "main.yml"
+     ansible.limit = "all"
+     ansible.host_vars = {
+       "client_prod" => {
+         "named" => "prod_named.conf",
+         "zone" => "azubi.dataport.de.zone",
+         "gateway" => "10.100.1.254"
+       },
+       "client_entw" => {
+         "named" => "entw_named.conf",
+         "zone" => "entw.azubi.dataport.de.zone",
+         "gateway" => "fd11:2:3:4::10",
+         "v6" => "-6"
+       },
+       "client_test" => {
+         "named" => "test_named.conf",
+         "zone" => "test.azubi.dataport.de.zone",
+         "gateway" => "10.100.2.254"
+        }
+      }
+      ansible.groups = {
+        "router" => ["vyos"],
+        "clients" => ["client_prod", "client_test", "client_entw"],
+        "dns" => ["client_prod", "client_test"],
+        "docker" => ["client_prod"]
+      }
     end
   end
 

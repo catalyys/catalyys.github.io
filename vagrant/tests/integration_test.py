@@ -125,7 +125,14 @@ def test_nat_external_ping_client_test():
     assert loss < 100, f"Ping failed: {loss}% packet loss\n{output}"
 
 def test_nat_external_ping_client_entw():
-    output = ssh_command("client_entw", "ping -6 -c 3 2606:4700:4700::1111")
+    output = ssh_command("client_entw", "ping -6 -c 3 64:ff9b::8.8.8.8")
+    loss = packet_loss_from_ping(output)
+    assert loss < 100, f"Ping failed: {loss}% packet loss\n{output}"
+
+# ---------------- NAT64 ----------------
+
+def test_nat64_ping_client_entw(client_prod_ip):
+    output = ssh_command("client_entw", f"ping -6 -c 3 64:ff9b::{client_prod_ip}")
     loss = packet_loss_from_ping(output)
     assert loss < 100, f"Ping failed: {loss}% packet loss\n{output}"
 
@@ -150,4 +157,10 @@ def test_dns_forwarding_test_prod():
 def test_dns_forwarding_prod_test():
     output = ssh_command("client_prod", "dig +short debian.test.azubi.dataport.de")
     assert "10.100.2.9" in output
+
+# ---------------- DNS64 ----------------
+
+def test_dns64_entw_test():
+    output = ssh_command("client_entw", "dig +short debian.test.azubi.dataport.de aaaa")
+    assert "64:ff9b::a64:209" in output
 

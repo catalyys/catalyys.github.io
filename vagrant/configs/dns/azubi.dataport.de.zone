@@ -16,7 +16,7 @@ mail                                IN      CNAME   docker
 ; END zone
 
 ; START forward
-test.azubi.dataport.de.             IN      NS      server2.azubi.dataport.de. ; für die forward zone
+test.azubi.dataport.de.             IN      NS      server2.test.azubi.dataport.de. ; für die forward zone
 server2.test.azubi.dataport.de.     IN      A       10.100.2.10 ; für die forward zone
 ; END forward
 

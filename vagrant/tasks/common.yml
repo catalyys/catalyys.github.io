@@ -1,12 +1,19 @@
-- name: delete default route on eth0
-  command: "ip {{ v6 | default('') }} route del default dev eth0"
+- name: refresh dhcp
+  ansible.builtin.shell: dhclient eth1
+  when: v6 is undefined
 
 - name: delete default route on eth0
+  command: "ip {{ v6 | default('') }} route del default dev eth0"
+  ignore_errors: true
+
+- name: delete default route on eth1
   command: "ip {{ v6 | default('') }} route del default dev eth1"
+  ignore_errors: true
   when: v6 is defined
 
 - name: add default route on eth1
   command: "ip {{ v6 | default('') }} route add default via {{ gateway }} dev eth1"
+  ignore_errors: true
 
 - name: change /etc/resolv.conf ipv4
   ansible.builtin.copy:
@@ -38,3 +45,18 @@
     group: root
     mode: '0644'
 
+- name: update all packages to their latest version
+  ansible.builtin.apt:
+    update-cache: true
+    upgrade: yes
+    update_cache_retries: 1
+  when: v6 is undefined
+
+- name: install packages
+  apt:
+    pkg:
+      - fish
+      - vim
+      - curl
+    state: present
+  when: v6 is undefined

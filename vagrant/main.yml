@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: router
   vars:
     ansible_connection: network_cli
     ansible_network_os: vyos
@@ -57,4 +57,17 @@
     - name: configure vyos
       vyos.vyos.vyos_config:
         lines: "{{ config.stdout }}"
+
+- hosts: clients
+  become: true
+
+  tasks:
+    - include_tasks: tasks/common.yml
+    - include_tasks: tasks/dns.yml
+      when: "'dns' in group_names"
+    - include_tasks: tasks/docker.yml
+      when: "'docker' in group_names"
+    - include_tasks: tasks/ipv6.yml
+      when: v6 is defined
+
 

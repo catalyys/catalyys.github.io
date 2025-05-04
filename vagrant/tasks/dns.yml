@@ -21,8 +21,8 @@
     group: bind
     mode: '0644'
 
-- name: copy azubi.dataport.de.zone
-  ansible.builtin.copy:
+- name: copy zone
+  ansible.builtin.template:
     src: "configs/dns/{{ zone }}"
     dest: "/var/lib/bind/{{ zone }}"
     owner: root
@@ -42,4 +42,15 @@
     owner: root
     group: root
     mode: '0644'
+  when: v6 is undefined
+
+- name: change /etc/resolv.conf
+  ansible.builtin.copy:
+    dest: /etc/resolv.conf
+    content: |
+      "nameserver {{ ansible_default_ipv6.address }}"
+    owner: root
+    group: root
+    mode: '0644'
+  when: v6 is defined
 
