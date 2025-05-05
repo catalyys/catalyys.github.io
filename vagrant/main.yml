@@ -63,6 +63,8 @@
 
   tasks:
     - include_tasks: tasks/common.yml
+    - include_tasks: tasks/nfs.yml
+      when: "'nfs' in group_names"
     - include_tasks: tasks/dns.yml
       when: "'dns' in group_names"
     - include_tasks: tasks/docker.yml

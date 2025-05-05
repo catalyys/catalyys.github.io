@@ -139,11 +139,11 @@ def test_nat64_ping_client_entw(client_prod_ip):
 # ---------------- DNS ----------------
 
 def test_dns_resolution_client_prod():
-    output = ssh_command("client_prod", "dig +short server1.azubi.dataport.de")
+    output = ssh_command("client_prod", "dig +short server1.azubi.dataport.de @localhost")
     assert "10.100.1.10" in output
 
 def test_dns_resolution_client_test():
-    output = ssh_command("client_test", "dig +short server2.test.azubi.dataport.de")
+    output = ssh_command("client_test", "dig +short server2.test.azubi.dataport.de @localhost")
     assert "10.100.2.10" in output
 
 def test_dns_resolution_client_test_prod(client_prod_ip):
@@ -151,11 +151,11 @@ def test_dns_resolution_client_test_prod(client_prod_ip):
     assert "10.100.1.10" in output
 
 def test_dns_forwarding_test_prod():
-    output = ssh_command("client_test", "dig +short server1.azubi.dataport.de")
+    output = ssh_command("client_test", "dig +short server1.azubi.dataport.de @localhost")
     assert "10.100.1.10" in output
 
 def test_dns_forwarding_prod_test():
-    output = ssh_command("client_prod", "dig +short debian.test.azubi.dataport.de")
+    output = ssh_command("client_prod", "dig +short debian.test.azubi.dataport.de @localhost")
     assert "10.100.2.9" in output
 
 # ---------------- DNS64 ----------------
@@ -163,4 +163,14 @@ def test_dns_forwarding_prod_test():
 def test_dns64_entw_test():
     output = ssh_command("client_entw", "dig +short debian.test.azubi.dataport.de aaaa")
     assert "64:ff9b::a64:209" in output
+
+# ---------------- NFS ----------------
+
+def test_nfs_prod():
+    output = ssh_command("client_test", "sudo ls /opt/nfs/backup/bind")
+    assert "prod_named.conf" in output
+
+def test_nfs_test():
+    output = ssh_command("client_test", "sudo ls /opt/nfs/backup/bind")
+    assert "test_named.conf" in output
 

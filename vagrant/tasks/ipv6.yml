@@ -19,5 +19,6 @@
       - fish
       - vim
       - curl
+      - nfs-common
     state: present
 

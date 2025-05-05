@@ -1,0 +1,36 @@
+- name: update all packages to their latest version
+  ansible.builtin.apt:
+    update-cache: true
+    upgrade: yes
+
+- name: install packages
+  apt:
+    pkg:
+      - nfs-kernel-server
+    state: present
+
+- name: create nfs share directory
+  ansible.builtin.file:
+    path: /opt/nfs/backup
+    state: directory
+    owner: nobody
+    group: nogroup
+    mode: '0777'
+
+- name: change /etc/exports
+  ansible.builtin.copy:
+    dest: /etc/exports
+    content: |
+      /opt/nfs/backup 10.100.1.0/24(rw,sync,no_subtree_check,no_root_squash) 10.100.2.0/24(rw,sync,no_subtree_check,no_root_squash)
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: reload nfs
+  ansible.builtin.shell: exportfs -a
+
+- name: restart nfs-kernel-server service
+  ansible.builtin.service:
+    name: nfs-kernel-server
+    state: restarted
+

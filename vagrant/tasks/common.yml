@@ -1,3 +1,7 @@
+- name: set hostname
+  ansible.builtin.hostname:
+    name: "{{ env }}"
+
 - name: refresh dhcp
   ansible.builtin.shell: dhclient eth1
   when: v6 is undefined
@@ -58,5 +62,14 @@
       - fish
       - vim
       - curl
+      - nfs-common
+      - rsync
     state: present
   when: v6 is undefined
+
+- name: create nfs share directory
+  ansible.builtin.file:
+    path: /mnt/backup
+    state: directory
+    mode: '0777'
+
