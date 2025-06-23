@@ -42,7 +42,7 @@ subnet6 2001:db8:0:1::/64 {
 
 #### Troubleshooting
 
-Zum Troubleshooting könnt ihr folgendes veruschen:
+Zum Troubleshooting könnt ihr folgendes versuchen:
 - `journalctl -eu dhcpd.service` für logs
 
 ---

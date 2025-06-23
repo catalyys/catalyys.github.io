@@ -2,7 +2,7 @@
 title: "IPv6"
 date: 2024-09-20
 lastmod: 2025-05-04
-draft: true
+draft: false
 description: "projekt ipv6"
 featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/project/azubi_umgebung_setup_v6.svg?raw=true"
 tags: ["fisi", "übung", "projekt"]

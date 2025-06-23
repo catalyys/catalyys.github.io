@@ -55,7 +55,7 @@ include "/etc/bind/named.conf.options";
 
 #### Troubleshooting
 
-Zum Troubleshooting könnt ihr folgendes veruschen:
+Zum Troubleshooting könnt ihr folgendes versuchen:
 - `journalctl -eu named.service` für logs
 - `named-checkconf` um die `named.conf` zu validieren
 - `named-checkzone azubi.dataport.de /var/lib/bind/azubi.dataport.de.zone` um die Zonen Config zu validieren

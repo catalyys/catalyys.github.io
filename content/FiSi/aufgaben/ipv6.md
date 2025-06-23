@@ -76,7 +76,7 @@ interface enp9s0
 
 #### *radvd* Troubleshooting
 
-Zum Troubleshooting könnt ihr folgendes veruschen:
+Zum Troubleshooting könnt ihr folgendes versuchen:
 
 `journalctl -eu radvd.service` für logs
 
