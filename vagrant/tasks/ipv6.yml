@@ -11,7 +11,7 @@
 - name: update all packages to their latest version
   ansible.builtin.apt:
     update-cache: true
-    upgrade: yes
+    #upgrade: yes
 
 - name: install packages
   apt:

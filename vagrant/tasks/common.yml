@@ -52,7 +52,7 @@
 - name: update all packages to their latest version
   ansible.builtin.apt:
     update-cache: true
-    upgrade: yes
+    #upgrade: yes
     update_cache_retries: 1
   when: v6 is undefined
 
