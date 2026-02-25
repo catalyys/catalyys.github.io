@@ -1,6 +1,6 @@
 ---
 title: "DNS"
-date: 2024-09-23
+date: 2024-10-06
 lastmod: 2025-02-03
 draft: false
 description: "projekt dns"

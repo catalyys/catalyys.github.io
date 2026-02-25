@@ -1,6 +1,6 @@
 ---
 title: "NFS"
-date: 2024-09-19
+date: 2025-05-04
 lastmod: 2025-05-04
 draft: false
 description: "projekt nfs"

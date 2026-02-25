@@ -5,8 +5,7 @@ lastmod: 2024-09-22
 draft: false
 tags: ["fisi", "übung"]
 
-cascade:
-  invertPagination: true
+reverseList: true
 ---
 
 {{< lead >}}

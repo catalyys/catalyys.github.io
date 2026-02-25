@@ -1,7 +1,7 @@
 ---
 title: "Docker"
-date: 2024-09-22
-lastmod: 2024-09-27
+date: 2024-10-15
+lastmod: 2024-10-15
 draft: false
 description: "projekt docker"
 featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/azubi_umgebung_setup.svg?raw=true"
