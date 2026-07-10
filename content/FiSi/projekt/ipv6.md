@@ -1,6 +1,6 @@
 ---
 title: "IPv6"
-date: 2024-09-20
+date: 2025-05-04
 lastmod: 2025-05-04
 draft: false
 description: "projekt ipv6"

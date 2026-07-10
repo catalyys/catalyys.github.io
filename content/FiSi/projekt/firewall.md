@@ -1,7 +1,7 @@
 ---
 title: "Firewall - VyOS"
-date: 2024-09-24
-lastmod: 2024-09-24
+date: 2024-10-04
+lastmod: 2024-10-04
 draft: false
 description: "projekt firewall"
 featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/azubi_umgebung_setup.svg?raw=true"
