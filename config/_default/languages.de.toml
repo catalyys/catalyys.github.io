@@ -1,6 +1,6 @@
 disabled = false
-languageCode = "de"
-languageName = "German"
+locale = "de"
+label = "German"
 weight = 1
 title = "ᛟᛚᛚᛁ"
 

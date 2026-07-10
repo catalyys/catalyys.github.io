@@ -1,7 +1,7 @@
 ---
 title: "NFS"
-date: 2025-05-04
-lastmod: 2025-05-04
+date: 2025-05-05
+lastmod: 2025-05-05
 draft: false
 description: "projekt nfs"
 featureimage: "https://github.com/catalyys/catalyys.github.io/blob/main/assets/project/azubi_umgebung_setup_v6.svg?raw=true"
